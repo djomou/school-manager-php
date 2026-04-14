@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Professeurs — School Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-logo">🎓</div>
+      <span class="navbar-title">School<span>Manager</span></span>
+    </a>
+    <div class="navbar-links">
+      <a href="index.html" class="nav-link">
+        <span class="nav-icon">👤</span>
+        <span class="nav-label">Professeurs</span>
+      </a>
+      <a href="matieres.html" class="nav-link">
+        <span class="nav-icon">📚</span>
+        <span class="nav-label">Matières</span>
+      </a>
+      <a href="attributions.html" class="nav-link">
+        <span class="nav-icon">🔗</span>
+        <span class="nav-label">Attributions</span>
+      </a>
+      <button class="logout-btn" onclick="logout()">
+        <span>⬡</span> Quitter
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE -->
+  <div class="page">
+
+    <!-- Header -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">👤 Professeurs</h1>
+        <p class="page-subtitle">Gérez les enseignants de l'établissement</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row" id="stats-row">
+      <div class="stat-card">
+        <div class="stat-num accent" id="stat-total">—</div>
+        <div class="stat-lbl">Total</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num emerald" id="stat-specs">—</div>
+        <div class="stat-lbl">Spécialités</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-selected" style="color:var(--text-muted)">0</div>
+        <div class="stat-lbl">Sélectionné</div>
+      </div>
+    </div>
+
+    <!-- Alerte -->
+    <div id="alert-box" class="alert" style="display:none"></div>
+
+    <!-- Formulaire -->
+    <div class="neo-card" style="margin-bottom:28px">
+      <div class="card-label" id="form-label">Ajouter un professeur</div>
+      <div class="form-grid">
+        <div class="field">
+          <label class="field-label">Nom</label>
+          <input type="text" id="nom" class="field-input" placeholder="Ex : Dupont"/>
+        </div>
+        <div class="field">
+          <label class="field-label">Prénom</label>
+          <input type="text" id="prenom" class="field-input" placeholder="Ex : Marie"/>
+        </div>
+        <div class="field">
+          <label class="field-label">Spécialité</label>
+          <input type="text" id="specialite" class="field-input" placeholder="Ex : Mathématiques"/>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="btn-submit" onclick="handleSubmit()">
+          ✚ Ajouter le professeur
+        </button>
+        <button class="btn btn-danger" id="btn-delete" onclick="handleDelete()" disabled>
+          🗑 Supprimer
+        </button>
+        <button class="btn btn-ghost" id="btn-deselect" onclick="deselect()" style="display:none">
+          ✕ Désélectionner
+        </button>
+      </div>
+    </div>
+
+    <!-- Recherche -->
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="search"
+        placeholder="Rechercher par nom, prénom ou spécialité..."
+        oninput="filterCards()"/>
+    </div>
+
+    <!-- Liste -->
+    <div class="cards-grid stagger" id="cards-grid"></div>
+
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/professeurs.js"></script>
+</body>
+</html>

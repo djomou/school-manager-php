@@ -1,0 +1,12 @@
+{
+    "name": "school-manager/api-gateway",
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    },
+    "config": {
+        "audit": {
+            "abandoned": "ignore",
+            "block-insecure": false
+        }
+    }
+}

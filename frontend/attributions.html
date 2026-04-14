@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Attributions — School Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-logo">🎓</div>
+      <span class="navbar-title">School<span>Manager</span></span>
+    </a>
+    <div class="navbar-links">
+      <a href="index.html" class="nav-link"><span class="nav-icon">👤</span><span class="nav-label">Professeurs</span></a>
+      <a href="matieres.html" class="nav-link"><span class="nav-icon">📚</span><span class="nav-label">Matières</span></a>
+      <a href="attributions.html" class="nav-link"><span class="nav-icon">🔗</span><span class="nav-label">Attributions</span></a>
+      <button class="logout-btn" onclick="logout()"><span>⬡</span> Quitter</button>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">🔗 Attributions</h1>
+        <p class="page-subtitle">Reliez les professeurs à leurs matières d'enseignement</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num amber" id="stat-att">—</div>
+        <div class="stat-lbl">Affectations</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num accent" id="stat-profs">—</div>
+        <div class="stat-lbl">Professeurs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num emerald" id="stat-mats">—</div>
+        <div class="stat-lbl">Matières</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-moy" style="color:var(--text-secondary)">—</div>
+        <div class="stat-lbl">Moy. / prof</div>
+      </div>
+    </div>
+
+    <div id="alert-box" class="alert" style="display:none"></div>
+
+    <!-- Formulaire -->
+    <div class="neo-card" style="margin-bottom:28px">
+      <div class="card-label">Nouvelle affectation</div>
+      <div class="form-grid-2">
+        <div class="field">
+          <label class="field-label">Professeur</label>
+          <select id="sel-prof" class="field-select">
+            <option value="">— Sélectionner un enseignant —</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Matière</label>
+          <select id="sel-mat" class="field-select">
+            <option value="">— Sélectionner une matière —</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px">
+        <label class="field-label">Année académique</label>
+        <input type="text" id="annee" class="field-input"
+          value="2025-2026" placeholder="Ex : 2025-2026"/>
+      </div>
+
+      <!-- Aperçu avant validation -->
+      <div id="preview-box" class="preview-box" style="display:none;margin-top:14px">
+        <span>👁</span><span id="preview-text"></span>
+      </div>
+
+      <div class="btn-row" style="margin-top:18px">
+        <button class="btn btn-warning" id="btn-submit" onclick="handleSubmit()">
+          🔗 Valider l'affectation
+        </button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Filtres -->
+    <div class="filters-row">
+      <select class="filter-select" id="filter-prof" onchange="filterList()">
+        <option value="">Tous les professeurs</option>
+      </select>
+      <select class="filter-select" id="filter-mat" onchange="filterList()">
+        <option value="">Toutes les matières</option>
+      </select>
+    </div>
+
+    <!-- Liste -->
+    <div class="att-list stagger" id="att-list"></div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/attributions.js"></script>
+</body>
+</html>

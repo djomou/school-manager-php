@@ -1,0 +1,18 @@
+# PHP
+vendor/
+*.log
+
+# Node (si résidus)
+node_modules/
+package-lock.json
+
+# Docker volumes
+*.sql.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Variables d'environnement
+.env
+.env.local

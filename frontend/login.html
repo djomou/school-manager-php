@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connexion — School Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .login-wrap {
+      width: 100%;
+      max-width: 420px;
+      animation: slideDown 0.5s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .login-logo {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #4f7ef7, #2d5be3);
+      border-radius: 22px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px;
+      margin: 0 auto 20px;
+      box-shadow: 8px 8px 20px rgba(79,126,247,0.3), -4px -4px 12px #ffffff;
+    }
+    .login-title {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+    .login-title span { color: var(--accent); }
+    .login-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    .login-card {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-card);
+    }
+    .login-field { margin-bottom: 20px; }
+    .login-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .login-input-wrap { position: relative; }
+    .login-input {
+      width: 100%;
+      background: var(--surface);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-in);
+      outline: none;
+      transition: var(--transition);
+    }
+    .login-input::placeholder { color: var(--text-muted); }
+    .login-input:focus {
+      box-shadow: var(--shadow-in), 0 0 0 3px var(--accent-soft);
+    }
+    .pass-toggle {
+      position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; color: var(--text-muted);
+      font-size: 16px; padding: 4px;
+      transition: color 0.2s;
+    }
+    .pass-toggle:hover { color: var(--accent); }
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 6px 6px 18px rgba(79,126,247,0.4), -3px -3px 10px #ffffff;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 8px 8px 24px rgba(79,126,247,0.5), -3px -3px 10px #ffffff;
+    }
+    .login-btn:active {
+      transform: scale(0.98);
+      box-shadow: inset 3px 3px 8px rgba(79,126,247,0.3);
+    }
+    .login-btn:disabled {
+      opacity: 0.6; cursor: not-allowed; transform: none;
+    }
+    .login-hint {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: var(--accent-soft);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      color: var(--accent-dark);
+      text-align: center;
+      font-weight: 600;
+      box-shadow: var(--shadow-btn);
+    }
+    .login-hint strong { color: var(--accent); }
+    .login-error {
+      background: var(--coral-soft);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      color: #c0392b;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-btn);
+      animation: fadeIn 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-header">
+      <div class="login-logo">🎓</div>
+      <h1 class="login-title">School<span>Manager</span></h1>
+      <p class="login-subtitle">Plateforme de gestion académique</p>
+    </div>
+
+    <div class="login-card">
+      <div id="error-box" class="login-error" style="display:none">
+        <span>⚠️</span><span id="error-msg"></span>
+      </div>
+
+      <div class="login-field">
+        <label class="login-label" for="email">Adresse email</label>
+        <div class="login-input-wrap">
+          <input type="email" id="email" class="login-input"
+            placeholder="admin@ecole.com" autocomplete="email" required/>
+        </div>
+      </div>
+
+      <div class="login-field">
+        <label class="login-label" for="password">Mot de passe</label>
+        <div class="login-input-wrap">
+          <input type="password" id="password" class="login-input"
+            placeholder="••••••••" autocomplete="current-password" required/>
+          <button type="button" class="pass-toggle" id="togglePass">👁️</button>
+        </div>      </div>
+
+	<br>
+      <button class="login-btn" id="loginBtn">
+        Se connecter →
+      </button>
+
+      <div class="login-hint">
+        <strong>Info :</strong> Veuillez entrer vos identifiants.
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    // Rediriger si déjà connecté
+    if (getToken()) window.location.href = "/index.html";
+
+    const emailInput  = document.getElementById('email');
+    const passInput   = document.getElementById('password');
+    const loginBtn    = document.getElementById('loginBtn');
+    const togglePass  = document.getElementById('togglePass');
+    const errorBox    = document.getElementById('error-box');
+    const errorMsg    = document.getElementById('error-msg');
+
+    togglePass.addEventListener('click', () => {
+      passInput.type = passInput.type === 'password' ? 'text' : 'password';
+      togglePass.textContent = passInput.type === 'password' ? '👁️' : '🙈';
+    });
+
+    async function handleLogin() {
+      errorBox.style.display = 'none';
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<span class="spinner"></span> Connexion...';
+
+      try {
+        const res = await fetch(`${GATEWAY_URL}/api/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: emailInput.value.trim(),
+            password: passInput.value
+          })
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          document.cookie = `token=${data.token}; path=/; max-age=86400; SameSite=Lax`;
+          window.location.href = '/index.html';
+        } else {
+          errorMsg.textContent = data.message || "Identifiants incorrects.";
+          errorBox.style.display = 'flex';
+        }
+      } catch (err) {
+        errorMsg.textContent = "Impossible de contacter la Gateway. Vérifiez le port 8081.";
+        errorBox.style.display = 'flex';
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = 'Se connecter →';
+      }
+    }
+
+    loginBtn.addEventListener('click', handleLogin);
+    passInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+    emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') passInput.focus(); });
+  </script>
+</body>
+</html>

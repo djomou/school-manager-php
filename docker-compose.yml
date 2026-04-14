@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: school-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: school_manager
+      MYSQL_USER: school_user
+      MYSQL_PASSWORD: school_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  ms-professeurs:
+    build: ./ms-professeurs
+    container_name: ms-professeurs
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mariadb
+
+  ms-matieres:
+    build: ./ms-matieres
+    container_name: ms-matieres
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mariadb
+
+  ms-attributions:
+    build: ./ms-attributions
+    container_name: ms-attributions
+    ports:
+      - "3002:3002"
+    depends_on:
+      - mariadb
+
+volumes:
+  db_data:
