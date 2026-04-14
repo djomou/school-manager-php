@@ -5,7 +5,6 @@ Voici l'essentiel à savoir concernant le projet:
     • sudo apt update && sudo apt upgrade -y, 
     • PHP 8.2 + extensions nécessaires,
     • Composer (gestionnaire de dépendances PHP),
-    • Node.js (uniquement pour la Gateway JWT), 
     • Docker + Docker Compose (pour MariaDB).
 
   Étape 2 — 🗄️ La Couche Données — MariaDB Déployer et configurer la base de données:
